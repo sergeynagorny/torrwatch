@@ -5,11 +5,14 @@ module.exports = {
     'eslint:recommended',
     'plugin:@typescript-eslint/recommended',
     'plugin:react-hooks/recommended',
+    'plugin:lodash/recommended'
   ],
   ignorePatterns: ['dist', '.eslintrc.cjs'],
   parser: '@typescript-eslint/parser',
-  plugins: ['react-refresh'],
+  plugins: ['react-refresh', 'lodash'],
   rules: {
+    "lodash/prefer-lodash-method": "off",
+    'lodash/import-scope': [2, "method"],
     'react-refresh/only-export-components': [
       'warn',
       { allowConstantExport: true },
