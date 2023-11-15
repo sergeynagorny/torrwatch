@@ -11,6 +11,8 @@ module.exports = {
   parser: '@typescript-eslint/parser',
   plugins: ['react-refresh', 'lodash'],
   rules: {
+    '@typescript-eslint/no-unused-vars': ["error", { "argsIgnorePattern": "^_" }],
+    "lodash/prefer-constant": 'off',
     "lodash/prefer-lodash-method": "off",
     'lodash/import-scope': [2, "method"],
     'react-refresh/only-export-components': [
