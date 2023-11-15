@@ -51,12 +51,12 @@ export const TorrentRow = forwardRef<HTMLDivElement, TorrentRowProps>(
               </div>
               {state === TorrentState.DOWNLOADING && (
                 <>
-                  <div className="flex items-center gap-1.5">
-                    <ClockIcon className="h-3.5 w-3.5" />
+                  <div className="flex items-center gap-1.5 font-medium">
+                    <ClockIcon className="h-3.5 w-3.5 text-muted-foreground" />
                     <span>{secondsToTimeFormat(eta)}</span>
                   </div>
-                  <div className="flex items-center gap-1.5">
-                    <GaugeCircleIcon className="h-3.5 w-3.5" />
+                  <div className="flex items-center gap-1.5 font-medium">
+                    <GaugeCircleIcon className="h-3.5 w-3.5 text-muted-foreground" />
                     <span>{formatBytes(dlspeed)}/s</span>
                   </div>
                 </>
