@@ -15,7 +15,7 @@ export const Home = () => {
   const { data: jackets, isLoading } = useJacketList({ q: debouncedValue, order });
 
   return (
-    <div className="m-auto p-10">
+    <div className="flex grow flex-col p-10">
       <Input onChange={(e) => setValue(e.target.value)} />
 
       {isLoading && <Spinner />}
