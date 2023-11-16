@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 
 import { useNavigate } from 'react-router-dom';
 import { useDebounce, useLocalStorage, useSessionStorage } from 'usehooks-ts';
@@ -17,6 +17,7 @@ export const Home = () => {
   const navigate = useNavigate();
   const [jacketToLoad, setJacketToLoad] = useState<Jacket | null>(null);
   const [value, setValue] = useSessionStorage<string>('search', '');
+  const [year, setYear] = useSessionStorage<string>('year', '');
 
   const debouncedValue = useDebounce<string>(value, 1000);
   const [quality, setQuality] = useLocalStorage<number>('quality', 1080);
@@ -28,7 +29,25 @@ export const Home = () => {
     navigate('/torrents');
   };
 
-  const { data: jackets, isLoading } = useJacketList({ q: debouncedValue, quality, order });
+  const { data, isLoading } = useJacketList({
+    q: debouncedValue,
+    year: Number(year) || undefined,
+    quality,
+    order,
+  });
+
+  useEffect(() => {
+    if (data?.filters.years) {
+      const [first] = data.filters.years;
+      if (first) {
+        setYear(String(first));
+      } else {
+        setYear('');
+      }
+    } else {
+      setYear('');
+    }
+  }, [data?.filters.years, setYear]);
 
   return (
     <div className="flex grow flex-col">
@@ -44,10 +63,22 @@ export const Home = () => {
             <SelectItem value="2160">2160</SelectItem>
           </SelectContent>
         </Select>
+        <Select value={year} onValueChange={(v) => setYear(v)}>
+          <SelectTrigger>
+            <SelectValue placeholder="Realease Year" />
+          </SelectTrigger>
+          <SelectContent>
+            {data?.filters.years?.map((year) => (
+              <SelectItem key={year} value={String(year)}>
+                {year}
+              </SelectItem>
+            ))}
+          </SelectContent>
+        </Select>
       </div>
       <div className="flex grow flex-col gap-3 p-3">
         {isLoading && <Spinner className="m-auto" />}
-        {jackets?.map((jacket) => (
+        {data?.results?.map((jacket) => (
           <JacketRow onClick={() => setJacketToLoad(jacket)} key={jacket.magnet} data={jacket} />
         ))}
       </div>
