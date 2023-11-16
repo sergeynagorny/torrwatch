@@ -9,7 +9,6 @@ export const useResumeTorrents = () => {
     mutationFn: torrentApi.resumeTorrents,
     onSuccess: (_, hashes) => {
       queryClient.setQueriesData({ queryKey: torrentModel.torrentKeys.lists() }, (oldData?: Torrent[]) => {
-        console.log({ hashes });
         return oldData?.map((torrent) => {
           if (hashes?.includes(torrent.hash)) {
             return { ...torrent, state: TorrentState.WAITING };

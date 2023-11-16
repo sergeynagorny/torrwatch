@@ -18,8 +18,6 @@ export const Home = () => {
 
   const { data: jackets, isLoading } = useJacketList({ q: debouncedValue, quality, order });
 
-  console.log({ jackets });
-
   return (
     <div className="flex grow flex-col">
       <div className="sticky inset-x-0 top-0 space-y-2 border-b bg-background px-4 py-3">
