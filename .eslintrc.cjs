@@ -11,6 +11,7 @@ module.exports = {
   parser: '@typescript-eslint/parser',
   plugins: ['react-refresh', 'lodash'],
   rules: {
+    '@typescript-eslint/ban-ts-comment': "warn",
     '@typescript-eslint/no-unused-vars': ["error", { "argsIgnorePattern": "^_" }],
     "lodash/prefer-constant": 'off',
     "lodash/prefer-lodash-method": "off",
