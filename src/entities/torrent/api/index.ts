@@ -10,8 +10,14 @@ export const getTorrentList = () => {
   return axios.get<Torrent[]>('/torrents/info').then((r) => r.data);
 };
 
-export const addTorrent = (m: string) => {
-  return axios.post('/torrents/add', { magnet: m }).then((r) => r.data);
+export const addTorrent = (data: { urls: string[]; paused?: boolean; sequentialDownload?: boolean }) => {
+  return axios
+    .post(
+      '/torrents/add',
+      { ...data, urls: data.urls.join('\n') },
+      { headers: { 'content-type': 'multipart/form-data' } },
+    )
+    .then((r) => r.data);
 };
 
 export const resumeTorrents = (h?: Torrent['hash'][]) => {
