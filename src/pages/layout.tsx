@@ -39,7 +39,7 @@ const LayoutNavigation = () => {
 
 export const Layout = () => {
   return (
-    <div className="grow pb-[60px]">
+    <div className="flex grow flex-col pb-[60px]">
       <Outlet />
       <LayoutNavigation />
     </div>
