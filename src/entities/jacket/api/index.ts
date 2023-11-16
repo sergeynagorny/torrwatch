@@ -10,7 +10,9 @@ export const getJacketList = ({
   q: string;
   signal?: AbortSignal;
 }): Promise<Jacket[]> => {
-  return fetch(`http://jacred.xyz/api/v2.0/indexers/all/results?apikey=&query=${q}&year=${year}`, { signal })
+  return fetch(`${import.meta.env.VITE_JACKET_API}/api/v2.0/indexers/all/results?apikey=&query=${q}&year=${year}`, {
+    signal,
+  })
     .then((r) => r.json())
     .then((r) => r.Results)
     .then(combineJacketsByTracker);
