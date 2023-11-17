@@ -56,9 +56,11 @@ export const Home = () => {
         </Select>
         <Select value={year} onValueChange={(v) => setYear(v)}>
           <SelectTrigger>
-            <SelectValue placeholder="Realease Year" />
+            <SelectValue placeholder={year ? year : 'Release Year '} aria-label={value} />
           </SelectTrigger>
           <SelectContent>
+            {/* @ts-ignore */}
+            <SelectItem defaultValue={'' as unknown as string}>Any</SelectItem>
             {data?.filters.years?.map((year) => (
               <SelectItem key={year} value={String(year)}>
                 {year}
