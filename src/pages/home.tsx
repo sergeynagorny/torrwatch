@@ -37,17 +37,8 @@ export const Home = () => {
   });
 
   useEffect(() => {
-    if (data?.filters.years) {
-      const [first] = data.filters.years;
-      if (first) {
-        setYear(String(first));
-      } else {
-        setYear('');
-      }
-    } else {
-      setYear('');
-    }
-  }, [data?.filters.years, setYear]);
+    setYear('');
+  }, [debouncedValue, setYear]);
 
   return (
     <div className="flex grow flex-col">
